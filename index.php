@@ -1,43 +1,40 @@
 <html>
 <head>
-	<title>list of media @ <?= $_SERVER["HTTP_REFERER"]; ?></title>
+	<title>list of media @ <?= $_SERVER["HTTP_HOST"]; ?></title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<style>
-	html, body{width : 100%; display : block;}
-	.container{
-		display : flex;
-		width : 750px;
-	}
-	
-	.card {
-		border : 1px solid #000;
-		width : 250px;
-		margin : 10px;
-	}
 
-	.card img{
-		width: 250px;
-	}
 	</style>
 </head>
 
 <body>
-	<h1>list of media @ <?= $_SERVER["HTTP_REFERER"]; ?></h1>
-	<div class="container">
-		<?php
+	<div class="container-fluid">
+		<h1>list of media @ <?= $_SERVER["HTTP_HOST"]; ?></h1>
+		<div class="row">
+			<?php
 			$EXTIMG = ["JPG", "JPEG", "BMP", "PNG", "SVG"];
 			$entries = scandir(".");
-			$images = array();
 			foreach($entries as $item){
 				$tmp = explode(".", $item);
 				$ext = $tmp[sizeof($tmp) - 1];
 				if(in_array(strtoupper($ext), $EXTIMG)){
-					echo "<div class='card'><img src='$item' /><span class='title'>$item</span></div>";
+				?>
+					<div class="col-md-4 col-lg-3 col-sm-6 col-12 col-xl-2">
+						<div class="card">
+							<img src="<?= $item; ?>" class="card-img-top" alt="<?= $item; ?>">
+							<div class="card-body">
+								<p class="card-text"><?= $item; ?></p>
+							</div>
+						</div>
+					</div>
+				<?php
 				}
 			}
-		?>
+			?>
+		</div>
 	</div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 </html>
-
-
-
